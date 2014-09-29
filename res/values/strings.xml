@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">WHS Schedule</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="time_prompt">The time is:</string>
+    <string name="time_left_begin">There are </string>
+    <string name="time_left_end"> minutes left in class</string>
+    <string-array name="current_period">
+        <item >It is currently zero period</item>
+        <item >It is currently 1st period</item>
+        <item >It is currently 2nd period</item>
+        <item >It is currently 3rd period</item>
+        <item >It is currently 4th period</item>
+        <item >It is currently 5th period</item>
+        <item >It is currently 6th period</item>
+    </string-array>
+    <string-array name="next_period">
+        <item >1st period is next</item>
+        <item >2nd period is next</item>
+        <item >3rd period is next</item>
+        <item >4th period is next</item>
+        <item >5th period is next</item>
+        <item >6th period is next</item>
+        <item >School is out!</item>
+        </string-array>
+    <string name="next_period">Next period is...</string>
+
+</resources>
