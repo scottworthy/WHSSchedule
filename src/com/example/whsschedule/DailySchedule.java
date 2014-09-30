@@ -21,6 +21,18 @@ public class DailySchedule {
 	
 	public String getClassPeriod()
 	{
+		int period = getPeriodNumber();
+		
+		if (period >= 0)
+		{
+			return String.format("Period %i", period);			
+		}
+		
+		return "School is out.";
+	}
+	
+	private int getPeriodNumber()
+	{
 		int period = 0;
 		
 		for (ClassPeriod aClass : classPeriods)
@@ -28,11 +40,10 @@ public class DailySchedule {
 			period++;
 			if (aClass.classInSession())
 			{
-				return String.format("Period %i", period);
+				return period;
 			}
 		}
-		
-		return "School is out.";
+		return -1;
 	}
 	
 	public boolean classMeetsToday(int period)
@@ -46,8 +57,28 @@ public class DailySchedule {
 		return false;
 	}
 	
-	public String nextClass(int period)
+	private boolean schoolIsOver()
 	{
+		ClassPeriod lastClass = classPeriods.get(classPeriods.size()-1);
+		if (DateTime.now().isAfter(lastClass.getEndTime().toDateTimeToday()))
+		{
+			return true;
+		}
+		return false;
+	}
+	
+	public String nextClass()
+	{
+		int period = getPeriodNumber();
+		
+		if (schoolIsOver())
+		{
+			return "School is out for today.";
+		}
+		if (period == -1) //School not in session yet
+		{
+			period = 0;		//Set next period to the first period
+		}
 		if (classPeriods.size() < period)
 		{
 			return "Last class of day";

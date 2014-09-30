@@ -43,6 +43,15 @@ public class ClassPeriod {
 	{
 		return beginTime.toString("h:m a");
 	}
+	public LocalTime getEndTime()
+	{
+		return endTime;
+	}
+	public LocalTime getBeginTime()
+	{
+		return beginTime;
+	}
+	
 	public int getPeriod()
 	{
 		return period;

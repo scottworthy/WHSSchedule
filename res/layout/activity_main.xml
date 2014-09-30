@@ -24,6 +24,6 @@
         android:layout_below="@+id/current_period_textview"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="32dp"
-        android:text="TextView" />
+        android:text="@string/next_period" />
 
 </RelativeLayout>

@@ -26,6 +26,13 @@ public class MainActivity extends ActionBarActivity {
 		
 		currentPeriodView.setText(schedule.getClassPeriod());
 	}
+	
+	private void updateNextPeriod()
+	{
+		TextView nextPeriod = (TextView)findViewById(R.id.next_period_text);
+		
+		nextPeriod.setText(schedule.nextClass());
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -49,5 +56,6 @@ public class MainActivity extends ActionBarActivity {
 	protected void onResume() {
 		super.onResume();
 		updateCurrentPeriod();
+		updateNextPeriod();
 	}
 }
