@@ -14,17 +14,17 @@ public class WeeklySchedule {
 	private int[] thursdayPeriods = {1, 2, 4, 5};
 	private int[] fridayPeriods = {1, 2, 3, 4, 5, 6};
 	
-	private int[] mondayBeginTimes = {945, 1033, 1121, 1210, 130, 218};
-	private int[] tuesdayBeginTimes = {815, 959, 1130, 135};
-	private int[] wednesdayBeginTimes = {815, 959, 1130, 135};
-	private int[] thursdayBeginTimes = {815, 959, 1130, 135};
-	private int[] fridayBeginTimes = {815, 916, 1030, 1131, 104, 205};
+	private int[] mondayBeginTimes = {945, 1033, 1121, 1210, 1330, 1418};
+	private int[] tuesdayBeginTimes = {815, 959, 1130, 1335};
+	private int[] wednesdayBeginTimes = {815, 959, 1130, 1335};
+	private int[] thursdayBeginTimes = {815, 959, 1130, 1335};
+	private int[] fridayBeginTimes = {815, 916, 1030, 1131, 1304, 1405};
 
-	private int[] mondayEndTimes = {1027, 1115, 1204, 1250, 212, 300};
-	private int[] tuesdayEndTimes = {940, 1124, 1255, 300};
-	private int[] wednesdayEndTimes = {940, 1124, 1255, 300};
-	private int[] thursdayEndTimes = {940, 1124, 1255, 300};
-	private int[] fridayEndTimes = {910, 1011, 1125, 1224, 159, 300};
+	private int[] mondayEndTimes = {1027, 1115, 1204, 1250, 1412, 1500};
+	private int[] tuesdayEndTimes = {940, 1124, 1255, 1500};
+	private int[] wednesdayEndTimes = {940, 1124, 1255, 1500};
+	private int[] thursdayEndTimes = {940, 1124, 1255, 1500};
+	private int[] fridayEndTimes = {910, 1011, 1125, 1224, 1359, 1500};
 
 	private int[][] periodLists = {mondayPeriods, tuesdayPeriods, wednesdayPeriods, thursdayPeriods, fridayPeriods};
 	private int[][] beginLists = {mondayBeginTimes, tuesdayBeginTimes, wednesdayBeginTimes, thursdayBeginTimes, fridayBeginTimes};
@@ -42,6 +42,7 @@ public class WeeklySchedule {
 	
 	public DailySchedule dailySchedule()
 	{
-		return schedule.get(DateTime.now().getDayOfWeek());
+		int today = DateTime.now().getDayOfWeek();
+		return schedule.get(today-1);
 	}
 }

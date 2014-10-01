@@ -37,11 +37,11 @@ public class ClassPeriod {
 	
 	public String getBeginTimeAsString()
 	{
-		return beginTime.toString("h:m a");
+		return beginTime.toString("h:mm a");
 	}
 	public String getEndTimeAsString()
 	{
-		return beginTime.toString("h:m a");
+		return endTime.toString("h:mm a");
 	}
 	public LocalTime getEndTime()
 	{

@@ -23,6 +23,8 @@ public class DailySchedule {
 	
 	public DailySchedule(int[] periods, int[] beginTimes, int[] endTimes)
 	{
+		classPeriods = new ArrayList<ClassPeriod>();
+		
 		for(int numClasses = 0; numClasses < periods.length; numClasses++)
 		{
 			classPeriods.add(new ClassPeriod(periods[numClasses],
