@@ -69,7 +69,9 @@ public class ClassPeriod {
 			case 3:
 				return "3rd";
 			default:
-				return String.format("%ith", period);
+				String ordinalText = String.format("%dth", period);
+				int i = 0;
+				return ordinalText;
 		}
 	}
 }

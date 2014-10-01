@@ -9,7 +9,7 @@ import android.widget.TextView;
 public class MainActivity extends ActionBarActivity {
 
 	String[] currentPeriodText;
-	DailySchedule schedule;
+	WeeklySchedule schedule;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -17,21 +17,21 @@ public class MainActivity extends ActionBarActivity {
 		setContentView(R.layout.activity_main);
 		
 		currentPeriodText = getResources(). getStringArray(R.array.current_period);
-		schedule = new DailySchedule();
+		schedule = new WeeklySchedule();
 	}
 	
 	private void updateCurrentPeriod()
 	{
 		TextView currentPeriodView = (TextView)findViewById(R.id.current_period_textview);
 		
-		currentPeriodView.setText(schedule.getClassPeriod());
+		currentPeriodView.setText(schedule.dailySchedule().getClassPeriod());
 	}
 	
 	private void updateNextPeriod()
 	{
 		TextView nextPeriod = (TextView)findViewById(R.id.next_period_text);
 		
-		nextPeriod.setText(schedule.nextClass());
+		nextPeriod.setText(schedule.dailySchedule().nextClass());
 	}
 
 	@Override
@@ -55,6 +55,7 @@ public class MainActivity extends ActionBarActivity {
 	
 	protected void onResume() {
 		super.onResume();
+		setContentView(R.layout.activity_main);
 		updateCurrentPeriod();
 		updateNextPeriod();
 	}
