@@ -8,6 +8,7 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 public class MainActivity extends ActionBarActivity {
@@ -53,7 +54,18 @@ public class MainActivity extends ActionBarActivity {
 	private void updateTimeNext()
 	{
 		nextTime = (TextView)findViewById(R.id.next_time_text_view);
-		nextTime.setText(schedule.dailySchedule().getTimeOfNext());
+		
+		String timeNext = schedule.dailySchedule().getTimeOfNext();
+		
+		if (timeNext.equals(""))
+		{
+			timeNext = schedule.nextDaySchedule().timeFirstClass();
+		}
+		
+		nextTime.setText(timeNext);
+
+		TextView timeNextPrompt = (TextView) findViewById(R.id.next_begins_prompt);
+
 	}
 
 	@Override
@@ -105,7 +117,7 @@ public class MainActivity extends ActionBarActivity {
 	@Override
 	public void onPause()
 	{
-		super.onDestroy();
+		super.onPause();
 		unregisterReceiver(broadcastReceiver);
 	}
 }

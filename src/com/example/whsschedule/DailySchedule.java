@@ -165,7 +165,6 @@ public class DailySchedule {
 	public String getTimeTillNext()
 	{
 		String timeString = "0:00";
-		ClassPeriod aClass;
 		ClassPeriod nextClass = nextClass();
 		
 		if (nextClass != null)
@@ -215,5 +214,10 @@ public class DailySchedule {
 			}
 		}*/
 		return timeString;
+	}
+	
+	public String timeFirstClass()
+	{
+		return classPeriods.get(0).getBeginTimeAsString();
 	}
 }

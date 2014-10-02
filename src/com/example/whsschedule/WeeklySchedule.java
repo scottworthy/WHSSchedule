@@ -45,4 +45,16 @@ public class WeeklySchedule {
 		int today = DateTime.now().getDayOfWeek();
 		return schedule.get(today-1);
 	}
+	
+	public DailySchedule nextDaySchedule()
+	{
+		int today = DateTime.now().getDayOfWeek();
+		if (today == schedule.size())
+		{
+			//If we are on the last day of the week, return the first day
+			return schedule.get(0);
+		}
+		
+		return schedule.get(today);
+	}
 }
