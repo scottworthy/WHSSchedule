@@ -1,6 +1,10 @@
 package com.example.whsschedule;
 
 import android.support.v7.app.ActionBarActivity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -8,44 +12,48 @@ import android.widget.TextView;
 
 public class MainActivity extends ActionBarActivity {
 
+	BroadcastReceiver broadcastReceiver;
 	String[] currentPeriodText;
 	WeeklySchedule schedule;
+	TextView currentPeriodView;
+	TextView nextPeriod;
+	TextView timeLeft;
+	TextView nextTime;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		currentPeriodText = getResources(). getStringArray(R.array.current_period);
 		schedule = new WeeklySchedule();
+		currentPeriodView = (TextView)findViewById(R.id.current_period_textview);
+		nextPeriod = (TextView)findViewById(R.id.next_period_text_view);
+		timeLeft = (TextView)findViewById(R.id.time_left_text_view);
+		nextTime = (TextView)findViewById(R.id.next_time_text_view);
 	}
 	
 	private void updateCurrentPeriod()
-	{
-		TextView currentPeriodView = (TextView)findViewById(R.id.current_period_textview);
-		
+	{		
+		currentPeriodView = (TextView)findViewById(R.id.current_period_textview);
 		currentPeriodView.setText(schedule.dailySchedule().getClassPeriod());
 	}
 	
 	private void updateNextPeriod()
 	{
-		TextView nextPeriod = (TextView)findViewById(R.id.next_period_text_view);
-		
+		nextPeriod = (TextView)findViewById(R.id.next_period_text_view);
 		nextPeriod.setText(schedule.dailySchedule().nextClassAsString());
 	}
 	
 	private void updateTimeLeft()
-	{
-		TextView timeLeft = (TextView)findViewById(R.id.time_left_text_view);
-		
+	{		
+		timeLeft = (TextView)findViewById(R.id.time_left_text_view);
 		timeLeft.setText(schedule.dailySchedule().getTimeLeft());
 	}
 	
 	private void updateTimeNext()
 	{
-		TextView timeLeft = (TextView)findViewById(R.id.next_time_text_view);
-		
-		timeLeft.setText(schedule.dailySchedule().getTimeOfNext());
+		nextTime = (TextView)findViewById(R.id.next_time_text_view);
+		nextTime.setText(schedule.dailySchedule().getTimeOfNext());
 	}
 
 	@Override
@@ -70,13 +78,34 @@ public class MainActivity extends ActionBarActivity {
 	protected void onResume() {
 		super.onResume();
 		updateAll();
+		
+		broadcastReceiver = new BroadcastReceiver() {
+			@Override
+			public void onReceive(Context ctx, Intent intent)
+			{
+				if (intent.getAction().compareTo(Intent.ACTION_TIME_TICK) == 0)
+				{
+					updateAll();
+				}
+			}
+			
+		};
+		registerReceiver(broadcastReceiver, new IntentFilter(Intent.ACTION_TIME_TICK));
+		
 	}
 	
 	private void updateAll() {
-		setContentView(R.layout.activity_main);
+		//setContentView(R.layout.activity_main);	//Seemed to be unnecessary
 		updateCurrentPeriod();	//set current period text
 		updateNextPeriod();		//set next period text
 		updateTimeLeft();
 		updateTimeNext();
+	}
+	
+	@Override
+	public void onPause()
+	{
+		super.onDestroy();
+		unregisterReceiver(broadcastReceiver);
 	}
 }
