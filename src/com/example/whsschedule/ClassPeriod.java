@@ -5,13 +5,13 @@ import org.joda.time.*;
 public class ClassPeriod {
 	private LocalTime beginTime;
 	private LocalTime endTime;
-	private int period;
+	private String period;
 	
-	public ClassPeriod(int periodNum, LocalTime begin, LocalTime end)
+	public ClassPeriod(String periodName, LocalTime begin, LocalTime end)
 	{
 		beginTime = begin;
 		endTime = end;
-		period = periodNum;
+		period = periodName;
 	}
 	
 	public boolean classesToday(DateTime today)
@@ -25,10 +25,30 @@ public class ClassPeriod {
 	}
 	
 	public boolean classInSession()
+	{		
+		if (!beforeClass() && !afterClass())
+		{
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean beforeClass()
 	{
 		DateTime currentTime = new DateTime();
 		
-		if (beginTime.toDateTimeToday().isBefore(currentTime) && endTime.toDateTimeToday().isAfter(currentTime))
+		if(beginTime.toDateTimeToday().isAfter(currentTime))
+		{
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean afterClass()
+	{
+		DateTime currentTime = new DateTime();
+		
+		if(endTime.toDateTimeToday().isBefore(currentTime))
 		{
 			return true;
 		}
@@ -52,11 +72,11 @@ public class ClassPeriod {
 		return beginTime;
 	}
 	
-	public int getPeriod()
+	public String getPeriodName()
 	{
 		return period;
 	}
-	public String getPeriodOrdinal()
+	/*public String getPeriodOrdinal()
 	{
 		switch (period)
 		{
@@ -73,5 +93,5 @@ public class ClassPeriod {
 				int i = 0;
 				return ordinalText;
 		}
-	}
+	}*/
 }

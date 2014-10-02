@@ -9,21 +9,83 @@
     tools:context="com.example.whsschedule.MainActivity" >
 
     <TextView
+        android:id="@+id/next_period_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/next_class_prompt"
+        android:layout_alignBottom="@+id/next_class_prompt"
+        android:layout_toRightOf="@+id/time_left_prompt"
+        android:text="next_period_placeholder" />
+
+    <TextView
+        android:id="@+id/next_begins_prompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/next_class_prompt"
+        android:layout_marginTop="19dp"
+        android:text="@string/next_class_time" />
+
+    <TextView
+        android:id="@+id/next_class_prompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/time_left_prompt"
+        android:layout_marginTop="19dp"
+        android:text="@string/next_period" />
+
+    <TextView
+        android:id="@+id/current_class_prompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="67dp"
+        android:text="@string/current_period_prompt" />
+
+    <TextView
+        android:id="@+id/time_left_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/time_left_prompt"
+        android:layout_alignBottom="@+id/time_left_prompt"
+        android:layout_toRightOf="@+id/next_begins_prompt"
+        android:text="time_left_placeholder" />
+
+    <TextView
+        android:id="@+id/time_left_prompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/current_class_prompt"
+        android:layout_marginTop="19dp"
+        android:text="@string/time_left" />
+
+    <AnalogClock
+        android:id="@+id/analogClock1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/next_begins_prompt"
+        android:layout_marginTop="38dp"
+        android:layout_toRightOf="@+id/next_class_prompt" />
+
+    <TextView
         android:id="@+id/current_period_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="17dp"
+        android:layout_alignBaseline="@+id/current_class_prompt"
+        android:layout_alignBottom="@+id/current_class_prompt"
+        android:layout_toRightOf="@+id/time_left_prompt"
         android:text="current_period_placeholder" />
 
     <TextView
-        android:id="@+id/next_period_text"
+        android:id="@+id/next_time_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/current_period_textview"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="32dp"
-        android:text="@string/next_period" />
+        android:layout_above="@+id/analogClock1"
+        android:layout_alignLeft="@+id/time_left_text_view"
+        android:layout_marginLeft="14dp"
+        android:text="next_time" />
 
 </RelativeLayout>

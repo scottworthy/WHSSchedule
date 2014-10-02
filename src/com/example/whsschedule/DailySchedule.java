@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.joda.time.DateTime;
 import org.joda.time.LocalTime;
+import org.joda.time.Minutes;
 
 import android.util.Log;
 
@@ -17,11 +18,11 @@ public class DailySchedule {
 		
 		for(int numClasses = 0; numClasses < MAX_CLASSES; numClasses++)
 		{
-			classPeriods.add(new ClassPeriod(numClasses+1, new LocalTime(15+numClasses, 0), new LocalTime(16+numClasses, 0)));
+			classPeriods.add(new ClassPeriod(""+numClasses+1, new LocalTime(15+numClasses, 0), new LocalTime(16+numClasses, 0)));
 		}
 	}
 	
-	public DailySchedule(int[] periods, int[] beginTimes, int[] endTimes)
+	public DailySchedule(String[] periods, int[] beginTimes, int[] endTimes)
 	{
 		classPeriods = new ArrayList<ClassPeriod>();
 		
@@ -34,37 +35,50 @@ public class DailySchedule {
 		
 		for (ClassPeriod thisClass : classPeriods)
 		{
-			Log.d("MYAPP", thisClass.getPeriodOrdinal() + " " + thisClass.getBeginTimeAsString() + " " + thisClass.getEndTimeAsString());
+			Log.d("WHSSched", thisClass.getPeriodName() + " " + thisClass.getBeginTimeAsString() + " " + thisClass.getEndTimeAsString());
 		}
 	}
 	
 	public String getClassPeriod()
 	{
-		int period = getPeriodNumber();
+		String period = currentPeriodName();
 		
-		if (period >= 0)
+		if (!period.equals(""))
 		{
 			String periodString = "Period " + period;
-			int i = 0;
 			return periodString;
+		}
+		else if (betweenClasses())
+		{
+			return "Between classes";
 		}
 		
 		return "School is out.";
 	}
 	
-	private int getPeriodNumber()
-	{
-		int period = 0;
-		
+	private String currentPeriodName()
+	{		
 		for (ClassPeriod aClass : classPeriods)
 		{
-			period++;
 			if (aClass.classInSession())
 			{
-				return period;
+				return aClass.getPeriodName();
 			}
 		}
-		return -1;
+		return "";
+	}
+	
+	public boolean betweenClasses()
+	{
+		for (int period = 0; period < classPeriods.size()-1; period++)
+		{
+			if (classPeriods.get(period).afterClass() && classPeriods.get(period+1).beforeClass())
+			{
+				return true;
+			}
+		}
+		
+		return false;
 	}
 	
 	public boolean classMeetsToday(int period)
@@ -88,27 +102,118 @@ public class DailySchedule {
 		return false;
 	}
 	
-	public String nextClass()
+	public String nextClassAsString()
 	{
-		int period = getPeriodNumber();
+		String nextClassText = "";
 		
 		if (schoolIsOver())
 		{
 			return "School is out for today.";
 		}
-		if (period == -1) //School not in session yet
+		
+		DateTime currentTime = new DateTime();
+		
+		//Look for a class that begins after current time
+		ClassPeriod nextClass = nextClass();
+		if (nextClass != null)
 		{
-			period = 0;		//Set next period to the first period
+			nextClassText = nextClass.getPeriodName();
 		}
-		if (classPeriods.size()-1 < period)
+		else	//If no later beginning class was found
 		{
-			return "Last class of day";
+			//Check to see if we are still in the last class of the day
+			if (currentTime.isBefore(classPeriods.get(classPeriods.size()-1).getEndTime().toDateTimeToday()))
+			{
+				nextClassText = "Last class of day";
+			}
 		}
-		else
+
+		return nextClassText;
+	}
+	
+	public ClassPeriod nextClass()
+	{
+		DateTime currentTime = new DateTime();
+		ClassPeriod nextClass = null;
+		
+		for (ClassPeriod aClass : classPeriods)
 		{
-			String nextClassText = "Next class is " + classPeriods.get(period).getPeriodOrdinal() + " period";
-			int i = 0;
-			return nextClassText;
+			if (currentTime.isBefore(aClass.getBeginTime().toDateTimeToday()))
+			{
+				nextClass = aClass;
+				break;
+			}
 		}
+		return nextClass;
+	}
+	
+	public String getTimeLeft()
+	{
+		String timeString = "0:00";
+		
+		for (ClassPeriod aClass : classPeriods)
+		{
+			if (aClass.classInSession())
+			{
+				Minutes diff = Minutes.minutesBetween(DateTime.now(), aClass.getEndTime().toDateTimeToday());
+				timeString = String.format("%d:%02d", diff.getMinutes()/60, diff.getMinutes()%60);
+			}
+		}
+		return timeString;
+	}
+
+	public String getTimeTillNext()
+	{
+		String timeString = "0:00";
+		ClassPeriod aClass;
+		ClassPeriod nextClass = nextClass();
+		
+		if (nextClass != null)
+		{
+			Minutes diff = Minutes.minutesBetween(DateTime.now(), nextClass.getBeginTime().toDateTimeToday());
+			timeString = String.format("%d:%02d", diff.getMinutes()/60, diff.getMinutes()%60);
+		}
+		
+		/*for (int period = 0; period < classPeriods.size()-1; period++)
+		{
+			aClass = classPeriods.get(period);
+			if (aClass.classInSession())
+			{
+				nextClass = classPeriods.get(period+1);
+				
+				if (nextClass != null)
+				{
+					Minutes diff = Minutes.minutesBetween(DateTime.now(), nextClass.getBeginTime().toDateTimeToday());
+					timeString = String.format("%d:%02d", diff.getMinutes()/60, diff.getMinutes()%60);
+				}
+			}
+		}*/
+		return timeString;
+	}
+	
+	public String getTimeOfNext()
+	{
+		String timeString = "";
+		//ClassPeriod aClass;
+		ClassPeriod nextClass = nextClass();
+		
+		if (nextClass != null)
+		{
+			timeString = nextClass.getBeginTimeAsString();
+		}
+		/*for (int period = 0; period < classPeriods.size()-1; period++)
+		{
+			aClass = classPeriods.get(period);
+			if (aClass.classInSession())
+			{
+				nextClass = classPeriods.get(period+1);
+				
+				if (nextClass != null)
+				{
+					timeString = nextClass.getBeginTimeAsString();
+				}
+			}
+		}*/
+		return timeString;
 	}
 }

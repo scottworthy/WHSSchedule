@@ -8,11 +8,11 @@ public class WeeklySchedule {
 	private ArrayList<DailySchedule> schedule;
 	
 	//Temporarily hard coded schedule
-	private int[] mondayPeriods = {1, 2, 3, 4, 5, 6};
-	private int[] tuesdayPeriods = {1, 2, 4, 6};
-	private int[] wednesdayPeriods = {2, 3, 5, 6};
-	private int[] thursdayPeriods = {1, 2, 4, 5};
-	private int[] fridayPeriods = {1, 2, 3, 4, 5, 6};
+	private String[] mondayPeriods = {"1st", "2nd", "3rd", "4th", "5th", "6th"};
+	private String[] tuesdayPeriods = {"1st", "2nd", "4th", "6th"};
+	private String[] wednesdayPeriods = {"2nd", "3rd", "5th", "6th"};
+	private String[] thursdayPeriods = {"1st", "3rd", "4th", "5th"};
+	private String[] fridayPeriods = {"1st", "2nd", "3rd", "4th", "5th", "6th"};
 	
 	private int[] mondayBeginTimes = {945, 1033, 1121, 1210, 1330, 1418};
 	private int[] tuesdayBeginTimes = {815, 959, 1130, 1335};
@@ -22,11 +22,11 @@ public class WeeklySchedule {
 
 	private int[] mondayEndTimes = {1027, 1115, 1204, 1250, 1412, 1500};
 	private int[] tuesdayEndTimes = {940, 1124, 1255, 1500};
-	private int[] wednesdayEndTimes = {940, 1124, 1255, 1500};
+	private int[] wednesdayEndTimes = {940, 1124, 1255, /*1500*/2000};
 	private int[] thursdayEndTimes = {940, 1124, 1255, 1500};
 	private int[] fridayEndTimes = {910, 1011, 1125, 1224, 1359, 1500};
 
-	private int[][] periodLists = {mondayPeriods, tuesdayPeriods, wednesdayPeriods, thursdayPeriods, fridayPeriods};
+	private String[][] periodLists = {mondayPeriods, tuesdayPeriods, wednesdayPeriods, thursdayPeriods, fridayPeriods};
 	private int[][] beginLists = {mondayBeginTimes, tuesdayBeginTimes, wednesdayBeginTimes, thursdayBeginTimes, fridayBeginTimes};
 	private int[][] endLists = {mondayEndTimes, tuesdayEndTimes, wednesdayEndTimes, thursdayEndTimes, fridayEndTimes};
 	

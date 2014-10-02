@@ -29,9 +29,23 @@ public class MainActivity extends ActionBarActivity {
 	
 	private void updateNextPeriod()
 	{
-		TextView nextPeriod = (TextView)findViewById(R.id.next_period_text);
+		TextView nextPeriod = (TextView)findViewById(R.id.next_period_text_view);
 		
-		nextPeriod.setText(schedule.dailySchedule().nextClass());
+		nextPeriod.setText(schedule.dailySchedule().nextClassAsString());
+	}
+	
+	private void updateTimeLeft()
+	{
+		TextView timeLeft = (TextView)findViewById(R.id.time_left_text_view);
+		
+		timeLeft.setText(schedule.dailySchedule().getTimeLeft());
+	}
+	
+	private void updateTimeNext()
+	{
+		TextView timeLeft = (TextView)findViewById(R.id.next_time_text_view);
+		
+		timeLeft.setText(schedule.dailySchedule().getTimeOfNext());
 	}
 
 	@Override
@@ -55,8 +69,14 @@ public class MainActivity extends ActionBarActivity {
 	
 	protected void onResume() {
 		super.onResume();
+		updateAll();
+	}
+	
+	private void updateAll() {
 		setContentView(R.layout.activity_main);
-		updateCurrentPeriod();
-		updateNextPeriod();
+		updateCurrentPeriod();	//set current period text
+		updateNextPeriod();		//set next period text
+		updateTimeLeft();
+		updateTimeNext();
 	}
 }
