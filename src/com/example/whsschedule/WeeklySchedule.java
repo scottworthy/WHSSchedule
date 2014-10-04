@@ -43,7 +43,11 @@ public class WeeklySchedule {
 	public DailySchedule dailySchedule()
 	{
 		int today = DateTime.now().getDayOfWeek();
-		return schedule.get(today-1);
+		if (today > schedule.size()) //If we are past the end of the week
+		{
+			return schedule.get(0);
+		}
+		return schedule.get(today-1); //Return first day of week
 	}
 	
 	public DailySchedule nextDaySchedule()
