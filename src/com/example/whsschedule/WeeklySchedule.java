@@ -53,7 +53,7 @@ public class WeeklySchedule {
 	public DailySchedule nextDaySchedule()
 	{
 		int today = DateTime.now().getDayOfWeek();
-		if (today == schedule.size())
+		if (today >= schedule.size())
 		{
 			//If we are on the last day of the week, return the first day
 			return schedule.get(0);

@@ -1,25 +1,29 @@
 package com.example.whsschedule;
 
+import org.joda.time.DateTime;
+
 import android.support.v7.app.ActionBarActivity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.TextView;
 
 public class MainActivity extends ActionBarActivity {
 
 	BroadcastReceiver broadcastReceiver;
-	String[] currentPeriodText;
+	String[] daysOfWeekArray;
 	WeeklySchedule schedule;
 	TextView currentPeriodView;
 	TextView nextPeriod;
 	TextView timeLeft;
 	TextView nextTime;
+	TextView dayOfWeek;
+	Resources res;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +35,9 @@ public class MainActivity extends ActionBarActivity {
 		nextPeriod = (TextView)findViewById(R.id.next_period_text_view);
 		timeLeft = (TextView)findViewById(R.id.time_left_text_view);
 		nextTime = (TextView)findViewById(R.id.next_time_text_view);
+		res = getResources();
+		int dayOfWeekID = R.array.days_of_week;
+		daysOfWeekArray = res.getStringArray(dayOfWeekID);
 	}
 	
 	private void updateCurrentPeriod()
@@ -64,8 +71,16 @@ public class MainActivity extends ActionBarActivity {
 		
 		nextTime.setText(timeNext);
 
-		TextView timeNextPrompt = (TextView) findViewById(R.id.next_begins_prompt);
+		//TextView timeNextPrompt = (TextView) findViewById(R.id.next_begins_prompt);
 
+	}
+	
+	private void updateDayOfWeek()
+	{
+		String today = daysOfWeekArray[DateTime.now().getDayOfWeek()];
+		
+		dayOfWeek = (TextView)findViewById(R.id.day_of_week);
+		dayOfWeek.setText(today);
 	}
 
 	@Override
@@ -112,6 +127,7 @@ public class MainActivity extends ActionBarActivity {
 		updateNextPeriod();		//set next period text
 		updateTimeLeft();
 		updateTimeNext();
+		updateDayOfWeek();
 	}
 	
 	@Override
