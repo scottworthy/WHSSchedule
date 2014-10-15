@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    <PreferenceScreen 
+        android:key="monday_screen"
+        android:title="@string/monday"
+        android:persistent="false">
+        
+        <CheckBoxPreference
+            android:key="monday_school_meets"
+            android:defaultValue="false"
+            android:title="@string/school_meets"
+            android:summary="@string/school_meets_summary" />
+        <Preference android:title="@string/monday_schedule_setup"
+            android:dependency="monday_screen" >
+            <intent android:action=".ClassList" 
+                android:targetPackage="com.example.whsschedule"
+                android:targetClass="com.example.whsschedule.ClassList" >
+                <extra android:name="day_id" android:value="1" />
+            </intent>
+        </Preference>
+            
+    </PreferenceScreen>
+    <PreferenceScreen 
+        android:key="tuesday_screen"
+        android:title="@string/tuesday"
+        android:persistent="false">
+        
+        <CheckBoxPreference
+            android:key="tuesday_school_meets"
+            android:defaultValue="false"
+            android:title="@string/school_meets"
+            android:summary="@string/school_meets_summary" />
+            
+    </PreferenceScreen>
+    <PreferenceScreen 
+        android:key="wednesday_screen"
+        android:title="@string/wednesday"
+        android:persistent="false">
+        
+        <CheckBoxPreference
+            android:key="wednesday_school_meets"
+            android:defaultValue="false"
+            android:title="@string/school_meets"
+            android:summary="@string/school_meets_summary" />
+            
+    </PreferenceScreen>
+        <PreferenceScreen 
+        android:key="thursday_screen"
+        android:title="@string/thursday"
+        android:persistent="false">
+        
+        <CheckBoxPreference
+            android:key="thursday_school_meets"
+            android:defaultValue="false"
+            android:title="@string/school_meets"
+            android:summary="@string/school_meets_summary" />
+            
+    </PreferenceScreen>
+      <PreferenceScreen 
+        android:key="friday_screen"
+        android:title="@string/friday"
+        android:persistent="false">
+        
+        <CheckBoxPreference
+            android:key="friday_school_meets"
+            android:defaultValue="false"
+            android:title="@string/school_meets"
+            android:summary="@string/school_meets_summary" />
+            
+    </PreferenceScreen>
+            <PreferenceScreen 
+        android:key="saturday_screen"
+        android:title="@string/saturday"
+        android:persistent="false">
+        
+        <CheckBoxPreference
+            android:key="saturday_school_meets"
+            android:defaultValue="false"
+            android:title="@string/school_meets"
+            android:summary="@string/school_meets_summary" />
+            
+    </PreferenceScreen>
+          <PreferenceScreen 
+        android:key="sunday_screen"
+        android:title="@string/sunday"
+        android:persistent="false">
+        
+        <CheckBoxPreference
+            android:key="sunday_school_meets"
+            android:defaultValue="false"
+            android:title="@string/school_meets"
+            android:summary="@string/school_meets_summary" />
+            
+    </PreferenceScreen>
+            
+</PreferenceScreen>

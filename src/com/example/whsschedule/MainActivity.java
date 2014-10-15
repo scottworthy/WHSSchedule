@@ -11,6 +11,7 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 public class MainActivity extends ActionBarActivity {
@@ -24,13 +25,18 @@ public class MainActivity extends ActionBarActivity {
 	TextView nextTime;
 	TextView dayOfWeek;
 	Resources res;
+	ScheduleApp app;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		schedule = new WeeklySchedule();
+		//This calls the ScheduleApp constructor which initializes the WeeklySchedule
+		app = (ScheduleApp)getApplication();
+		
+		//Get the global WeeklySchedule
+		schedule = WeeklySchedule.getInstance();
 		currentPeriodView = (TextView)findViewById(R.id.current_period_textview);
 		nextPeriod = (TextView)findViewById(R.id.next_period_text_view);
 		timeLeft = (TextView)findViewById(R.id.time_left_text_view);
@@ -38,6 +44,12 @@ public class MainActivity extends ActionBarActivity {
 		res = getResources();
 		int dayOfWeekID = R.array.days_of_week;
 		daysOfWeekArray = res.getStringArray(dayOfWeekID);
+	}
+	
+	public void openSettings(View view)
+	{
+		Intent settings_activity = new Intent(this, ClassList.class);
+		startActivity(settings_activity);
 	}
 	
 	private void updateCurrentPeriod()
@@ -77,7 +89,7 @@ public class MainActivity extends ActionBarActivity {
 	
 	private void updateDayOfWeek()
 	{
-		String today = daysOfWeekArray[DateTime.now().getDayOfWeek()];
+		String today = daysOfWeekArray[DateTime.now().getDayOfWeek()-1];
 		
 		dayOfWeek = (TextView)findViewById(R.id.day_of_week);
 		dayOfWeek.setText(today);
@@ -97,6 +109,8 @@ public class MainActivity extends ActionBarActivity {
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 		if (id == R.id.action_settings) {
+			Intent prefIntent = new Intent(this, SettingsActivity.class);
+			startActivity(prefIntent);
 			return true;
 		}
 		return super.onOptionsItemSelected(item);

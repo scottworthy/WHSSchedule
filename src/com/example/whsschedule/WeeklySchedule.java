@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import org.joda.time.DateTime;
 
 public class WeeklySchedule {
+	
+	private static WeeklySchedule instance;
+	
 	private ArrayList<DailySchedule> schedule;
 	
 	//Temporarily hard coded schedule
@@ -31,13 +34,27 @@ public class WeeklySchedule {
 	private int[][] endLists = {mondayEndTimes, tuesdayEndTimes, wednesdayEndTimes, thursdayEndTimes, fridayEndTimes};
 	
 	
-	public WeeklySchedule()
+	private WeeklySchedule()
 	{
 		schedule = new ArrayList<DailySchedule>();
 		for (int dayOfWeek = 0; dayOfWeek < 5; dayOfWeek++)
 		{
 			schedule.add(new DailySchedule(periodLists[dayOfWeek], beginLists[dayOfWeek], endLists[dayOfWeek]));
 		}
+	}
+	
+	//Uses singleton design pattern, instance initialized only once
+	public static void initInstance()
+	{
+		if (instance == null)
+		{
+			instance = new WeeklySchedule();
+		}
+	}
+	
+	public static WeeklySchedule getInstance()
+	{
+		return instance;
 	}
 	
 	public DailySchedule dailySchedule()
@@ -48,6 +65,15 @@ public class WeeklySchedule {
 			return schedule.get(0);
 		}
 		return schedule.get(today-1); //Return first day of week
+	}
+	
+	public DailySchedule dailySchedule(int index)
+	{
+		if (index > schedule.size())
+		{
+			return schedule.get(0);
+		}
+		return schedule.get(index);
 	}
 	
 	public DailySchedule nextDaySchedule()

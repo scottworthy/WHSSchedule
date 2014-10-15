@@ -8,34 +8,55 @@
     <string name="time_left">Time left in class: </string>
     <string name="current_period_prompt">Current class: </string>
     <string name="next_period">Next class: </string>
-    <string name="next_class_time">Next class begins at: </string>
+    <string name="next_class_time">Next class at: </string>
+    <string name="class_name_prompt">Class Name/Period</string>
+    <string name="begin_time">Begin Time</string>
+    <string name="end_time">End Time</string>
+    <string name="save">Save</string>
+
     <string-array name="current_period">
-        <item >It is currently zero period</item>
-        <item >It is currently 1st period</item>
-        <item >It is currently 2nd period</item>
-        <item >It is currently 3rd period</item>
-        <item >It is currently 4th period</item>
-        <item >It is currently 5th period</item>
-        <item >It is currently 6th period</item>
+        <item>It is currently zero period</item>
+        <item>It is currently 1st period</item>
+        <item>It is currently 2nd period</item>
+        <item>It is currently 3rd period</item>
+        <item>It is currently 4th period</item>
+        <item>It is currently 5th period</item>
+        <item>It is currently 6th period</item>
     </string-array>
     <string-array name="next_period">
-        <item >1st period is next</item>
-        <item >2nd period is next</item>
-        <item >3rd period is next</item>
-        <item >4th period is next</item>
-        <item >5th period is next</item>
-        <item >6th period is next</item>
-        <item >School is out!</item>
-        </string-array>
-    <string name="update_button_text">Update</string>
-    <string-array name="days_of_week">
-        <item >Monday</item>
-        <item >Tuesday</item>
-        <item >Wednesday</item>
-        <item >Thursday</item>
-        <item >Friday</item>
-        <item >Saturday</item>
-        <item >Sunday</item>
+        <item>1st period is next</item>
+        <item>2nd period is next</item>
+        <item>3rd period is next</item>
+        <item>4th period is next</item>
+        <item>5th period is next</item>
+        <item>6th period is next</item>
+        <item>School is out!</item>
     </string-array>
+
+    <string name="update_button_text">Update</string>
+
+    <string-array name="days_of_week">
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+        <item>Sunday</item>
+    </string-array>
+
+    <string name="school_meets">School Meets</string>
+    <string name="school_meets_summary">School is in session on this day</string>
+    <string name="monday">Monday</string>
+    <string name="tuesday">Tuesday</string>
+    <string name="wednesday">Wednesday</string>
+    <string name="thursday">Thursday</string>
+    <string name="friday">Friday</string>
+    <string name="saturday">Saturday</string>
+    <string name="sunday">Sunday</string>
+    <string name="title_activity_settings">Schedule Settings</string>
+    <string name="title_activity_class_list">Class List</string>
+    <string name="monday_schedule_setup">Setup Monday Schedule</string>
+    <string name="title_activity_class_details">Class Details</string>
 
 </resources>

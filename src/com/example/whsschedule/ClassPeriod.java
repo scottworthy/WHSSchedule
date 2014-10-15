@@ -72,6 +72,23 @@ public class ClassPeriod {
 		return beginTime;
 	}
 	
+	public void setBeginTime(LocalTime time)
+	{
+		if (time != null)
+			beginTime = time;
+	}
+	
+	public void setEndTime(LocalTime time)
+	{
+		if (time != null)
+			endTime = time;
+	}
+	
+	public void setPeriodName(String name)
+	{
+		period = name;
+	}
+	
 	public String getPeriodName()
 	{
 		return period;

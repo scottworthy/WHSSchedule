@@ -39,6 +39,11 @@ public class DailySchedule {
 		}
 	}
 	
+	public ArrayList<ClassPeriod> classPeriods()
+	{
+		return classPeriods;
+	}
+	
 	public String getClassPeriod()
 	{
 		String period = currentPeriodName();

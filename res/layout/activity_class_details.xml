@@ -1,0 +1,65 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="${relativePackage}.${activityClass}" >
+
+    <TextView
+        android:id="@+id/class_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/class_name_prompt" />
+
+    <EditText
+        android:id="@+id/class_name_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/class_name"
+        android:ems="10" />
+
+    <TextView
+        android:id="@+id/begin_time_prompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/class_name_text_view"
+        android:layout_marginTop="16dp"
+        android:text="@string/begin_time" />
+
+
+
+    <TimePicker
+        android:id="@+id/begin_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/begin_time_prompt"
+        android:layout_below="@+id/begin_time_prompt" />
+
+
+    <TextView
+        android:id="@+id/end_time_prompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/begin_time"
+        android:layout_marginTop="21dp"
+        android:text="@string/end_time" />
+
+    <TimePicker
+        android:id="@+id/end_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/end_time_prompt"
+        android:layout_below="@+id/end_time_prompt" />
+
+    <Button
+        android:id="@+id/save_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/end_time"
+        android:text="@string/save"
+		android:onClick="saveChanges" />
+
+    
+</RelativeLayout>
