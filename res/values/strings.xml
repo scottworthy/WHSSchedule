@@ -57,6 +57,12 @@
     <string name="title_activity_settings">Schedule Settings</string>
     <string name="title_activity_class_list">Class List</string>
     <string name="monday_schedule_setup">Setup Monday Schedule</string>
+    <string name="tuesday_schedule_setup">Setup Tuesday Schedule</string>
+    <string name="wednesday_schedule_setup">Setup Wednesday Schedule</string>
+    <string name="thursday_schedule_setup">Setup Thursday Schedule</string>
+    <string name="friday_schedule_setup">Setup Friday Schedule</string>
+    <string name="saturday_schedule_setup">Setup Saturday Schedule</string>
+    <string name="sunday_schedule_setup">Setup Sunday Schedule</string>
     <string name="title_activity_class_details">Class Details</string>
 
 </resources>

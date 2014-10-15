@@ -15,7 +15,7 @@
             <intent android:action=".ClassList" 
                 android:targetPackage="com.example.whsschedule"
                 android:targetClass="com.example.whsschedule.ClassList" >
-                <extra android:name="day_id" android:value="1" />
+                <extra android:name="day_id" android:value="0" />
             </intent>
         </Preference>
             
@@ -30,6 +30,14 @@
             android:defaultValue="false"
             android:title="@string/school_meets"
             android:summary="@string/school_meets_summary" />
+        <Preference android:title="@string/tuesday_schedule_setup"
+            android:dependency="tuesday_school_meets">
+            <intent android:action=".ClassList"
+                android:targetPackage="com.example.whsschedule"
+                android:targetClass="com.example.whsschedule.ClassList">
+                <extra android:name="day_id" android:value="1" />
+            </intent>
+        </Preference>
             
     </PreferenceScreen>
     <PreferenceScreen 
@@ -42,7 +50,14 @@
             android:defaultValue="false"
             android:title="@string/school_meets"
             android:summary="@string/school_meets_summary" />
-            
+        <Preference android:title="@string/wednesday_schedule_setup"
+            android:dependency="wednesday_school_meets">
+            <intent android:action=".ClassList"
+                android:targetPackage="com.example.whsschedule"
+                android:targetClass="com.example.whsschedule.ClassList">
+                <extra android:name="day_id" android:value="2" />
+            </intent>
+        </Preference>
     </PreferenceScreen>
         <PreferenceScreen 
         android:key="thursday_screen"
@@ -54,7 +69,15 @@
             android:defaultValue="false"
             android:title="@string/school_meets"
             android:summary="@string/school_meets_summary" />
-            
+        <Preference android:title="@string/thursday_schedule_setup"
+            android:dependency="thursday_school_meets">
+            <intent android:action=".ClassList"
+                android:targetPackage="com.example.whsschedule"
+                android:targetClass="com.example.whsschedule.ClassList">
+                <extra android:name="day_id" android:value="3" />
+            </intent>
+        </Preference>
+        
     </PreferenceScreen>
       <PreferenceScreen 
         android:key="friday_screen"
@@ -66,6 +89,14 @@
             android:defaultValue="false"
             android:title="@string/school_meets"
             android:summary="@string/school_meets_summary" />
+        <Preference android:title="@string/friday_schedule_setup"
+            android:dependency="friday_school_meets">
+            <intent android:action=".ClassList"
+                android:targetPackage="com.example.whsschedule"
+                android:targetClass="com.example.whsschedule.ClassList">
+                <extra android:name="day_id" android:value="4" />
+            </intent>
+        </Preference>
             
     </PreferenceScreen>
             <PreferenceScreen 
@@ -78,7 +109,15 @@
             android:defaultValue="false"
             android:title="@string/school_meets"
             android:summary="@string/school_meets_summary" />
-            
+        <Preference android:title="@string/saturday_schedule_setup"
+            android:dependency="saturday_school_meets">
+            <intent android:action=".ClassList"
+                android:targetPackage="com.example.whsschedule"
+                android:targetClass="com.example.whsschedule.ClassList">
+                <extra android:name="day_id" android:value="5" />
+            </intent>
+        </Preference>    
+        
     </PreferenceScreen>
           <PreferenceScreen 
         android:key="sunday_screen"
@@ -90,7 +129,15 @@
             android:defaultValue="false"
             android:title="@string/school_meets"
             android:summary="@string/school_meets_summary" />
-            
+        <Preference android:title="@string/sunday_schedule_setup"
+            android:dependency="sunday_school_meets">
+            <intent android:action=".ClassList"
+                android:targetPackage="com.example.whsschedule"
+                android:targetClass="com.example.whsschedule.ClassList">
+                <extra android:name="day_id" android:value="6" />
+            </intent>
+        </Preference>    
+        
     </PreferenceScreen>
             
 </PreferenceScreen>

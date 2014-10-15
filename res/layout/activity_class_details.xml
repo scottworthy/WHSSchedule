@@ -34,6 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/begin_time_prompt"
+        android:layout_alignParentRight="true"
         android:layout_below="@+id/begin_time_prompt" />
 
 
@@ -51,15 +52,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/end_time_prompt"
+        android:layout_alignParentRight="true"
         android:layout_below="@+id/end_time_prompt" />
 
     <Button
         android:id="@+id/save_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/end_time"
+        android:layout_toRightOf="@id/class_name_text_view"
+        android:layout_alignParentRight="true"
         android:text="@string/save"
-		android:onClick="saveChanges" />
+		android:onClick="saveButtonPressed" />
 
     
 </RelativeLayout>

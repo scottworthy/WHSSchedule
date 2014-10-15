@@ -18,6 +18,8 @@ public class ClassList extends Activity {
 
 	WeeklySchedule schedule;
 	private ListView classList;
+	private int day;
+	private ClassListArrayAdapter adapter;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +28,9 @@ public class ClassList extends Activity {
 		
 		schedule = WeeklySchedule.getInstance();
 		
-		final ClassListArrayAdapter adapter = new ClassListArrayAdapter(this, R.layout.schedule_list_item, schedule.dailySchedule().classPeriods());
+		day = ClassList.this.getIntent().getIntExtra("day_id", 0);
+		
+		adapter = new ClassListArrayAdapter(this, R.layout.schedule_list_item, schedule.dailySchedule(day).classPeriods());
 		
 		classList = (ListView)findViewById(R.id.classListView);
 		
@@ -42,11 +46,17 @@ public class ClassList extends Activity {
 					long id) {
 				Intent classDetails = new Intent(ClassList.this, ClassDetails.class);
 				classDetails.putExtra("classIndex", position);
-				int day = ClassList.this.getIntent().getIntExtra("day_id", position);
 				classDetails.putExtra("dayIndex",  day);
 				startActivity(classDetails);
 			}
 		});
-		
+	}
+	
+	@Override
+	public void onResume()
+	{
+		super.onResume();
+		if (adapter != null)
+			adapter.notifyDataSetChanged();
 	}
 }

@@ -47,11 +47,23 @@ public class ClassDetails extends Activity {
 		
 	}
 	
-	public void saveChanges(View view)
+	public void saveButtonPressed(View view)
+	{
+		saveChanges();
+	}
+	
+	private void saveChanges()
 	{
 		LocalTime changedBegin = new LocalTime(beginTime.getCurrentHour(), beginTime.getCurrentMinute());
 		LocalTime changedEnd = new LocalTime(endTime.getCurrentHour(), endTime.getCurrentMinute());
 		thisClass.setBeginTime(changedBegin);
 		thisClass.setEndTime(changedEnd);
+	}
+	
+	@Override
+	public void onPause()
+	{
+		super.onPause();
+		saveChanges();
 	}
 }
