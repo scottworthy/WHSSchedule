@@ -13,7 +13,11 @@
     <string name="begin_time">Begin Time</string>
     <string name="end_time">End Time</string>
     <string name="save">Save</string>
-
+    <string name="edit">Edit</string>
+    <string name="add">Add</string>
+    <string name="delete">Delete</string>
+    <string name="setup_daily">View/Change Daily Schedules</string>
+    
     <string-array name="current_period">
         <item>It is currently zero period</item>
         <item>It is currently 1st period</item>

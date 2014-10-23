@@ -9,7 +9,7 @@ public class MainPreferences extends PreferenceFragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		addPreferencesFromResource(R.xml.main_prefs);
+		addPreferencesFromResource(R.xml.main_preferences);
 	}
 	
 }

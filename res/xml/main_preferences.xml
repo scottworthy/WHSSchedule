@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    <PreferenceCategory 
+        android:title="@string/setup_daily">
+        <Preference android:title="@string/monday" >
+            <intent android:action=".ClassList" 
+                android:targetPackage="com.example.whsschedule"
+                android:targetClass="com.example.whsschedule.ClassList" >
+                <extra android:name="day_id" android:value="0" />
+            </intent>
+        </Preference>
+        <Preference android:title="@string/tuesday">
+            <intent android:action=".ClassList"
+                android:targetPackage="com.example.whsschedule"
+                android:targetClass="com.example.whsschedule.ClassList">
+                <extra android:name="day_id" android:value="1" />
+            </intent>
+        </Preference>
+        <Preference android:title="@string/wednesday">
+            <intent android:action=".ClassList"
+                android:targetPackage="com.example.whsschedule"
+                android:targetClass="com.example.whsschedule.ClassList">
+                <extra android:name="day_id" android:value="2" />
+            </intent>
+        </Preference>
+        <Preference android:title="@string/thursday">
+            <intent android:action=".ClassList"
+                android:targetPackage="com.example.whsschedule"
+                android:targetClass="com.example.whsschedule.ClassList">
+                <extra android:name="day_id" android:value="3" />
+            </intent>
+        </Preference>
+        <Preference android:title="@string/friday">
+            <intent android:action=".ClassList"
+                android:targetPackage="com.example.whsschedule"
+                android:targetClass="com.example.whsschedule.ClassList">
+                <extra android:name="day_id" android:value="4" />
+            </intent>
+        </Preference>
+        <Preference android:title="@string/saturday">
+            <intent android:action=".ClassList"
+                android:targetPackage="com.example.whsschedule"
+                android:targetClass="com.example.whsschedule.ClassList">
+                <extra android:name="day_id" android:value="5" />
+            </intent>
+        </Preference> 
+        <Preference android:title="@string/sunday">
+            <intent android:action=".ClassList"
+                android:targetPackage="com.example.whsschedule"
+                android:targetClass="com.example.whsschedule.ClassList">
+                <extra android:name="day_id" android:value="6" />
+            </intent>
+        </Preference>  
+    </PreferenceCategory>
+
+</PreferenceScreen>

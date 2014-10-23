@@ -5,12 +5,15 @@ import java.util.ArrayList;
 import org.joda.time.DateTime;
 import org.joda.time.LocalTime;
 import org.joda.time.Minutes;
+import org.joda.time.format.DateTimeFormatter;
+import org.joda.time.format.DateTimeFormatterBuilder;
 
 import android.util.Log;
 
 public class DailySchedule {
 	private ArrayList<ClassPeriod> classPeriods;
 	public static final int MAX_CLASSES = 6;
+	private int day;
 	
 	public DailySchedule()
 	{	
@@ -18,17 +21,30 @@ public class DailySchedule {
 		
 		for(int numClasses = 0; numClasses < MAX_CLASSES; numClasses++)
 		{
-			classPeriods.add(new ClassPeriod(""+numClasses+1, new LocalTime(15+numClasses, 0), new LocalTime(16+numClasses, 0)));
+			classPeriods.add(new ClassPeriod(0, ""+numClasses+1, new LocalTime(15+numClasses, 0), new LocalTime(16+numClasses, 0)));
 		}
 	}
 	
-	public DailySchedule(String[] periods, int[] beginTimes, int[] endTimes)
+	public DailySchedule(int day, ArrayList<ClassPeriod> list)
+	{
+		this.day = day;
+		classPeriods = new ArrayList<ClassPeriod>();
+		//Go through the list and add them in order
+		//(corrects any wrong ordering in database which doesn't really care about order anyway)
+		for (ClassPeriod aClass : list)
+		{
+			classPeriods.add(getLocation(aClass.getBeginTime()), aClass);
+		}
+	}
+	
+	public DailySchedule(int day, String[] periods, int[] beginTimes, int[] endTimes)
 	{
 		classPeriods = new ArrayList<ClassPeriod>();
+		this.day = day;
 		
 		for(int numClasses = 0; numClasses < periods.length; numClasses++)
 		{
-			classPeriods.add(new ClassPeriod(periods[numClasses],
+			classPeriods.add(new ClassPeriod(day, periods[numClasses],
 					new LocalTime(beginTimes[numClasses]/100, beginTimes[numClasses]%100),
 					new LocalTime(endTimes[numClasses]/100, endTimes[numClasses]%100)));
 		}
@@ -50,7 +66,7 @@ public class DailySchedule {
 		
 		if (!period.equals(""))
 		{
-			String periodString = "Period " + period;
+			String periodString = period;
 			return periodString;
 		}
 		else if (betweenClasses())
@@ -99,8 +115,15 @@ public class DailySchedule {
 	
 	private boolean schoolIsOver()
 	{
-		ClassPeriod lastClass = classPeriods.get(classPeriods.size()-1);
-		if (DateTime.now().isAfter(lastClass.getEndTime().toDateTimeToday()))
+		if (classPeriods.size() > 0)
+		{
+			ClassPeriod lastClass = classPeriods.get(classPeriods.size()-1);
+			if (DateTime.now().isAfter(lastClass.getEndTime().toDateTimeToday()))
+			{
+				return true;
+			}
+		}
+		else
 		{
 			return true;
 		}
@@ -224,5 +247,44 @@ public class DailySchedule {
 	public String timeFirstClass()
 	{
 		return classPeriods.get(0).getBeginTimeAsString();
+	}
+	
+	public ClassPeriod addClass(String className, LocalTime beginTime, LocalTime endTime)
+	{
+		int order = getLocation(beginTime);
+		classPeriods.add(order, new ClassPeriod(day, className, beginTime, endTime));
+		return classPeriods.get(order);
+	}
+	
+	public void removeClass(int order)
+	{
+		classPeriods.remove(order);
+	}
+
+	public ClassPeriod addClass(String className, String beginTime, String endTime)
+	{
+		//Change String version of times to LocalTime version
+		DateTimeFormatter formatter = new DateTimeFormatterBuilder().appendPattern("h:mm a").toFormatter();
+		LocalTime begin = LocalTime.parse(beginTime, formatter);
+		LocalTime end = LocalTime.parse(endTime, formatter);
+		
+		int order = getLocation(begin);
+		classPeriods.add(order, new ClassPeriod(day, className, begin, end));
+		return classPeriods.get(order);
+	}
+	
+	public int getLocation(LocalTime beginTime)
+	{
+		int location = 0;
+		
+		for (ClassPeriod aClass : classPeriods)
+		{
+			if (aClass.getBeginTime().isBefore(beginTime))
+			{
+				location++;
+			}
+		}
+		
+		return location;
 	}
 }

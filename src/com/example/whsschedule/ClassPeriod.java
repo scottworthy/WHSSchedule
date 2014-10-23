@@ -1,19 +1,57 @@
 package com.example.whsschedule;
 
 import org.joda.time.*;
+import org.joda.time.format.DateTimeFormatter;
+import org.joda.time.format.DateTimeFormatterBuilder;
 
 public class ClassPeriod {
 	private LocalTime beginTime;
 	private LocalTime endTime;
 	private String period;
+	private int dayOfWeek;
+	private long id;
 	
-	public ClassPeriod(String periodName, LocalTime begin, LocalTime end)
+	public ClassPeriod(int day, String periodName, LocalTime begin, LocalTime end)
 	{
 		beginTime = begin;
 		endTime = end;
 		period = periodName;
 	}
 	
+	public ClassPeriod(int day, String periodName, String beginString, String endString)
+	{
+		this(day, periodName, beginString, endString, 0);
+	}
+	
+	public ClassPeriod(int day, String periodName, String beginString, String endString, long id)
+	{
+
+		period = periodName;
+		
+		DateTimeFormatter formatter = new DateTimeFormatterBuilder().appendPattern("h:mm a").toFormatter();
+		LocalTime begin = LocalTime.parse(beginString, formatter);
+		LocalTime end = LocalTime.parse(endString, formatter);
+
+		beginTime = begin;
+		endTime = end;
+		dayOfWeek = day;
+		this.id = id;
+	}
+	
+	
+
+	/* Database Support Methods */
+	public long getID()
+	{
+		return id;
+	}
+	
+	public void setID(long id)
+	{
+		this.id = id;
+	}
+	
+	/*Other Methods*/
 	public boolean classesToday(DateTime today)
 	{
 		int dayOfWeek = today.getDayOfWeek();
@@ -93,22 +131,9 @@ public class ClassPeriod {
 	{
 		return period;
 	}
-	/*public String getPeriodOrdinal()
+
+	public String toString()
 	{
-		switch (period)
-		{
-			case 0:
-				return "0th";
-			case 1:
-				return "1st";
-			case 2:
-				return "2nd";
-			case 3:
-				return "3rd";
-			default:
-				String ordinalText = String.format("%dth", period);
-				int i = 0;
-				return ordinalText;
-		}
-	}*/
+		return period + " " + getBeginTimeAsString() + " - " + getEndTimeAsString();
+	}
 }

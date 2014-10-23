@@ -26,6 +26,7 @@ public class MainActivity extends ActionBarActivity {
 	TextView dayOfWeek;
 	Resources res;
 	ScheduleApp app;
+	ClassPeriodDataSource datasource;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +36,15 @@ public class MainActivity extends ActionBarActivity {
 		//This calls the ScheduleApp constructor which initializes the WeeklySchedule
 		app = (ScheduleApp)getApplication();
 		
+		datasource = new ClassPeriodDataSource(this);
+		datasource.open();
+		
+		
+		
 		//Get the global WeeklySchedule
+
 		schedule = WeeklySchedule.getInstance();
+		schedule.setDataSource(datasource);
 		currentPeriodView = (TextView)findViewById(R.id.current_period_textview);
 		nextPeriod = (TextView)findViewById(R.id.next_period_text_view);
 		timeLeft = (TextView)findViewById(R.id.time_left_text_view);
@@ -44,6 +52,7 @@ public class MainActivity extends ActionBarActivity {
 		res = getResources();
 		int dayOfWeekID = R.array.days_of_week;
 		daysOfWeekArray = res.getStringArray(dayOfWeekID);
+		
 	}
 	
 	public void openSettings(View view)
@@ -117,6 +126,7 @@ public class MainActivity extends ActionBarActivity {
 	}
 	
 	protected void onResume() {
+		//datasource.open();
 		super.onResume();
 		updateAll();
 		
@@ -147,7 +157,15 @@ public class MainActivity extends ActionBarActivity {
 	@Override
 	public void onPause()
 	{
+		//datasource.close();
 		super.onPause();
 		unregisterReceiver(broadcastReceiver);
+	}
+	
+	@Override
+	public void onDestroy()
+	{
+		datasource.close();
+		super.onDestroy();
 	}
 }
